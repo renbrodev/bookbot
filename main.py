@@ -8,7 +8,6 @@ def get_book_text(filepath):
     return contents
 
 def main():
-    # print(get_book_text("books/frankenstein.txt"))
     word_count = get_word_count(get_book_text("books/frankenstein.txt"))
     char_log = get_char_log(get_book_text("books/frankenstein.txt"))
     sorted_log = get_sorted_char_log(char_log)
