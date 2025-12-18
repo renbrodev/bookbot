@@ -1,3 +1,4 @@
+import sys
 from stats import get_word_count, get_char_log, get_sorted_char_log
 
 def get_book_text(filepath):
@@ -8,8 +9,12 @@ def get_book_text(filepath):
     return contents
 
 def main():
-    word_count = get_word_count(get_book_text("books/frankenstein.txt"))
-    char_log = get_char_log(get_book_text("books/frankenstein.txt"))
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    word_count = get_word_count(get_book_text(f"{sys.argv[1]}"))
+    char_log = get_char_log(get_book_text(f"{sys.argv[1]}"))
     sorted_log = get_sorted_char_log(char_log)
 
     print_report(sorted_log)
@@ -17,9 +22,9 @@ def main():
 def print_report(char_count_dict):
 
     print("============ BOOKBOT ============")
-    print(f"Analyzing book found at books/frankenstein.txt...")
+    print(f"Analyzing book found at {sys.argv[1]}...")
     print("----------- Word Count ----------")
-    print(f"Found {get_word_count(get_book_text("books/frankenstein.txt"))} total words")
+    print(f"Found {get_word_count(get_book_text(f"{sys.argv[1]}"))} total words")
     print("--------- Character Count -------")
     for dict in char_count_dict:
         print(f"{dict["char"]}: {dict["num"]}")
